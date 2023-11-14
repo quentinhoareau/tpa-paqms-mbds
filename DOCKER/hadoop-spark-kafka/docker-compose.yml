@@ -113,7 +113,7 @@ services:
     networks:
       - net
     ports:
-      - 50075:50075
+      - 9866:9866
       - 50010:50010
   postgres:
     image: postgres:latest
@@ -154,7 +154,7 @@ services:
       - ./hadoop-hive.env
     command: /opt/hive/bin/hive --service metastore
     environment:
-      SERVICE_PRECONDITION: "namenode:9870 datanode:50075 hive-metastore-postgresql:5432"
+      SERVICE_PRECONDITION: "namenode:9870 datanode:9866 hive-metastore-postgresql:5432"
     networks:
       - net
     ports:
