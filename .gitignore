@@ -1,1 +1,2 @@
 DOCKER/hadoop-spark-kafka/volumes/datasource/
+*.csv
