@@ -117,10 +117,12 @@ services:
       - 50010:50010
   postgres:
     image: postgres:latest
+    container_name: tpa-postgres
     ports:
       - 5432:5432
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./volumes/tpa-postgres:/tpa-postgres
+      - ./volumes/datasource:/tpa-postgres/datasource
     networks:
       - net
     environment:
@@ -172,12 +174,13 @@ services:
 
   mongo:
     image: mongo
+    container_name: tpa-mongo
     restart: always
     networks:
       - net
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./volumes/tpa-mongo:/tpa-mongo
+      - ./volumes/datasource:/tpa-mongo/datasource
 
   mongo-express:
     image: mongo-express
