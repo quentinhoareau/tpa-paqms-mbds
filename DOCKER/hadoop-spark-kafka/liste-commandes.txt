@@ -1,0 +1,6 @@
+##Envoyer CO2 sur hadoop
+- docker cp /Users/alexismalattia/Documents/Cours/MBDS/TPA/CO2.csv datanode:/usr
+
+hdfs dfs -mkdir /user/fichiers
+
+hdfs dfs -put CO2.csv /user/fichiers
