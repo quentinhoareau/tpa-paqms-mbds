@@ -209,7 +209,7 @@ services:
   # Ce container permet de populer la base de données couchdb
   python:
     image: python:3.8
-    depends_on:
+    depends_on: 
       - couchdb
     build: ./tpa-python
     container_name: tpa-python
@@ -218,6 +218,14 @@ services:
     volumes:
       - ./tpa-python/volumes:/tpa-python
       - ./datasource:/tpa-python/datasource
+      
+  python-app:
+    container_name: tpa-python-app
+    build: ./tpa-python-app
+    depends_on:
+      - namenode
+    networks:
+      - net
       
     
 volumes:
