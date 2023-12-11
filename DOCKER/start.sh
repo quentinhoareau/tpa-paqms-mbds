@@ -1,3 +1,5 @@
+# --- Refactor Data --- #
+
 # --- Docker compose --- #
 docker-compose down
 docker-compose up -d --build
@@ -8,7 +10,7 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:9870); d
 done
 
 docker cp ./datasource/CO2.csv datanode:/usr
-docker exec -i datanode bash < ./tpa-datanode/hdfs.sh
+docker exec -it datanode bash < ./tpa-datanode/hdfs.sh
 
 # --- MongoDB --- #
 docker exec -it tpa-mongo sh ./tpa-mongo/initDB.sh
