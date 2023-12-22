@@ -4,4 +4,4 @@ WORKDIR /tpa-python
 COPY . /tpa-python/volumes
 
 RUN pip install couchdb
-CMD ["sh", "init.sh"]
+CMD ["tail", "-f", "/dev/null"]
