@@ -121,8 +121,7 @@ services:
       - net
     volumes:
       - ./tpa-mongo/volumes:/tpa-mongo
-      - ./datasource:/tpa-mongo/datasource
-
+      - ./datasource/datasource_utf8/mongo:/tpa-mongo/datasource
   mongo-express:
     image: mongo-express
     networks:
@@ -146,7 +145,7 @@ services:
       COUCHDB_PASSWORD: password
     volumes:
       - ./tpa-couchdb/volumes:/tpa-couchdb
-      - ./datasource:/tpa-couchdb/datasource
+      - ./datasource/datasource_utf8/couchdb:/tpa-couchdb/datasource
 
   # Ce container permet de populer la base de données couchdb
   python:
@@ -159,7 +158,7 @@ services:
       - "5001:5001"
     volumes:
       - ./tpa-python/volumes:/tpa-python
-      - ./datasource:/tpa-python/datasource
+      - ./datasource/datasource_utf8/couchdb:/tpa-python/datasource
       
   python-app:
     container_name: tpa-python-app
