@@ -6,6 +6,8 @@ COUCHDB_PASSWORD=password
 COUCHDB_IDENTIFIANT=$COUCHDB_USERNAME:$COUCHDB_PASSWORD
 
 curl -X DELETE $COUCHDB_URL/tpa -u $COUCHDB_IDENTIFIANT
+echo 'Database tpa deleted'
 
 # Création de la base de données
 curl -X PUT $COUCHDB_URL/tpa -u $COUCHDB_IDENTIFIANT
+echo 'Database tpa created'

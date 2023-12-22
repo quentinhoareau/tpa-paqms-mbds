@@ -4,7 +4,7 @@ docker-compose up -d --build
 
 until $(curl --output /dev/null --silent --head --fail http://localhost:9870); do
     printf 'Waiting for namenode:  http://localhost:9870 to start...\n'
-    sleep 2
+    sleep 5
 done
 
 docker cp ./datasource/CO2.csv datanode:/usr
@@ -18,7 +18,7 @@ docker exec -it tpa-mongo sh ./tpa-mongo/initDB.sh
 # Attente de la disponibilité de CouchDB
 until $(curl --output /dev/null --silent --head --fail http://localhost:5984); do
     printf 'Waiting for CouchDB : http://localhost:5984 to start...\n'
-    sleep 2
+    sleep 5
 done
 
 # Exécution du script d'initialisation de la base de données CouchDB
