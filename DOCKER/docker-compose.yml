@@ -152,6 +152,8 @@ services:
     image: python:3.8
     depends_on: 
       - couchdb
+      - pandas
+      - numpy
     build: ./tpa-python
     container_name: tpa-python
     ports:
