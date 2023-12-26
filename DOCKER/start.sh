@@ -30,9 +30,12 @@ done
 sleep 5
 
 # --- init HDFS et ajout CO2 dans HDFS ---#
-echo Implementing HDFS...
+echo "Implementing HDFS..."
 docker cp ./datasource/cleaned_CO2.csv datanode:/usr
+docker cp ../hadoop-map-reduce/hadoop-map-reduce/out/artifacts/hadoop_map_reduce_jar/hadoop-map-reduce.jar datanode:/usr
+docker cp ../hadoop-map-reduce/CatalogueImportCouchDB/out/artifacts/CatalogueImportCouchDB_jar/CatalogueImportCouchDB.jar datanode:/usr
 docker exec -it datanode bash < ./tpa-datanode/hdfs.sh
+docker exec -it datanode bash hdfs dfs -test -e /user/fichiers/cleaned_CO2.csv
 
 # --- MongoDB --- #
 echo "Init MongoDB database..."
