@@ -20,27 +20,25 @@ python3 ./script_formatage_CO2.py
 echo "Docker compose..."
 docker-compose down
 docker-compose up -d --build
-echo "Docker compose done"
+echo "Docker compose done\n\n"
 
 until $(curl --output /dev/null --silent --head --fail http://localhost:9870); do
     printf 'Waiting for namenode:  http://localhost:9870 to start...\n'
     sleep 5
 done
+sleep 2
 
-sleep 5
-
-# --- init HDFS et ajout CO2 dans HDFS ---#
+# --- init HDFS et ajout CO2 dans HDFS --- #
 echo "Implementing HDFS..."
 docker cp ./datasource/cleaned_CO2.csv datanode:/usr
-docker cp ../hadoop-map-reduce/hadoop-map-reduce/out/artifacts/hadoop_map_reduce_jar/hadoop-map-reduce.jar datanode:/usr
-docker cp ../hadoop-map-reduce/tranformCatalogue/out/artifacts/transformCatalogue_jar/transformCatalogue.jar datanode:/usr
 docker exec -it datanode bash < ./tpa-datanode/hdfs.sh
-docker exec -it datanode bash hdfs dfs -test -e /user/fichiers/cleaned_CO2.csv
+echo "HDFS done \n\n"
 
 # --- MongoDB --- #
 echo "Init MongoDB database..."
 docker exec -it tpa-mongo sh ./tpa-mongo/initDB.sh
 docker exec -it tpa-postgres sh ./tpa-postgres/importPostgresDatasource.sh
+echo "MongoDB database done \n\n"
 
 
 # --- CouchDB --- #
@@ -52,6 +50,14 @@ echo "Init CouchDB database..."
 docker exec -it tpa-couchdb sh /tpa-couchdb/init.sh
 docker exec -it tpa-python python3 /tpa-python/populate-couchdb.py
 
-
 # --- Postgres --- #
+echo "Init Postgres... "
 docker exec -it tpa-postgres sh ./tpa-postgres/initDB.sh
+echo "Postgres done \n\n"
+
+# --- runing hadoop map reduce --- #
+echo "Runing Map reduce..."
+docker cp ../hadoop-map-reduce/hadoop-map-reduce/out/artifacts/hadoop_map_reduce_jar/hadoop-map-reduce.jar datanode:/usr
+docker cp ../hadoop-map-reduce/tranformCatalogue/out/artifacts/transformCatalogue_jar/transformCatalogue.jar datanode:/usr
+#docker exec -it datanode bash < ./tpa-datanode/runMapReduce.sh
+echo "Map reduce done \n\n"
