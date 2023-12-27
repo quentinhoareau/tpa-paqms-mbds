@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import csv
 # Path to the original and temporary cleaned file
 file_path = '../DOCKER/datasource/CO2.csv'
 temp_file_path = '../DOCKER/datasource/temp_cleaned_CO2.csv'  # Chemin pour le fichier temporaire nettoyé
@@ -9,9 +10,14 @@ temp_file_path = '../DOCKER/datasource/temp_cleaned_CO2.csv'  # Chemin pour le f
 with open(file_path, 'r') as file, open(temp_file_path, 'w') as temp_file:
     for line in file:
         cleaned_line = line.replace('"', '')
-        temp_file.write(cleaned_line)
+        if len(cleaned_line) != 0:
+            if len(cleaned_line.split(',')) == 6:
+                columns = cleaned_line.split(',')
+                columns.pop(2)
+                temp_file.write(','.join(columns))
+            else:
+                temp_file.write(cleaned_line)
 
-# Load the CO2.csv file
 co2_data = pd.read_csv(temp_file_path)
 
 # Splitting the 'Marque / Modele' column into 'Marque' and 'Modele'
