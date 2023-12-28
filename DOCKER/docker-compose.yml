@@ -172,7 +172,12 @@ services:
       - namenode
     networks:
       - net
-      
+
+  angular:
+    container_name: tpa-angular
+    build: ./tpa-angular
+    ports:
+      - "4200:80"
     
 volumes:
   datanode: {}

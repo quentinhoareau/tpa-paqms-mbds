@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 })
 export class Stats4Component implements AfterViewInit {
   @Input() chartId:string;
-  @Input() data:{nom:string, nbVentes:number}[] = [];
+  @Input() data:{nom:string, nbPerson:number}[] = [];
 
   constructor() {
   }
@@ -31,7 +31,7 @@ export class Stats4Component implements AfterViewInit {
 
 // Création de l'échelle X
     var x = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return d.nbVentes; })])
+      .domain([0, d3.max(data, function(d) { return d.nbPerson; })])
       .range([0, width - margin.left - margin.right]);
 
 // Création de l'échelle Y
@@ -45,7 +45,7 @@ export class Stats4Component implements AfterViewInit {
       .data(data)
       .enter().append("rect")
       .attr("class", "bar")
-      .attr("width", function(d) { return x(d.nbVentes); })
+      .attr("width", function(d) { return x(d.nbPerson); })
       .attr("y", function(d) { return y(d.nom); })
       .attr("height", y.bandwidth());
 

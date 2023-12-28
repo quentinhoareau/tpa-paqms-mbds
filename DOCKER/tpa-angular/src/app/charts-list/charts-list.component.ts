@@ -21,7 +21,7 @@ export class ChartsListComponent implements OnInit{
   }
 
   loadData(){
-      this.apiService.getPrixParModele(this.marque).subscribe((data: any[])=>{
+      this.apiService.getPrixParMarque(this.marque).subscribe((data: any[])=>{
       this.dataChart1 = data;
     })
 
@@ -29,11 +29,11 @@ export class ChartsListComponent implements OnInit{
       this.dataChart2 = data;
     } )
 
-    this.apiService.getPuissanceParModele(this.marque).subscribe((data: any[])=>{
+    this.apiService.getPuissanceParMarque(this.marque).subscribe((data: any[])=>{
       this.dataChart3 = data;
     })
 
-    this.apiService.getVentesParModele(this.marque).subscribe((data: any[])=>{
+    this.apiService.getVentesParMarque(this.marque).subscribe((data: any[])=>{
       this.dataChart4 = data;
     })
 }

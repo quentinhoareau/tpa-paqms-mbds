@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 })
 export class Stats2Component implements AfterViewInit{
    @Input() chartId:string;
-  @Input() data:{couleur:string, nbVentes:number}[] = [];
+  @Input() data:{couleur:string, nbPerson:number}[] = [];
 
   constructor() { }
 
@@ -29,7 +29,7 @@ export class Stats2Component implements AfterViewInit{
     // Create the pie layout and arc generator.
     const pie = d3.pie()
       .sort(null)
-      .value(d => d.nbVentes);
+      .value(d => d.nbPerson);
 
     const arc = d3.arc()
       .innerRadius(0)
@@ -72,7 +72,7 @@ export class Stats2Component implements AfterViewInit{
       .attr("fill", d => color(d.data.couleur))
       .attr("d", arc)
       .append("title")
-      .text(d => `${d.data.couleur}: ${d.data.nbVentes.toLocaleString("en-US")}`);
+      .text(d => `${d.data.couleur}: ${d.data.nbPerson.toLocaleString("en-US")}`);
 
     // Create a new arc generator to place a label close to the edge.
     // The label shows the value if there is enough room.
@@ -90,7 +90,7 @@ export class Stats2Component implements AfterViewInit{
         .attr("x", 0)
         .attr("y", "0.7em")
         .attr("fill-opacity", 0.7)
-        .text(d => d.data.nbVentes.toLocaleString("en-US")));
+        .text(d => d.data.nbPerson.toLocaleString("en-US")));
 
     return svg.node();
   }
