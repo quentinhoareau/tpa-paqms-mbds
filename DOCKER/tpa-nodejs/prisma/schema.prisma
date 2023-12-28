@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:HelloMBDS@tpa-postgres:5432/tpa_postgres?schema=public"
+}
+
+// marketing
+model marketing {
+  id                  Int     @id @default(autoincrement())
+  age                 Int
+  sexe                String
+  taux                Int
+  situation_familiale String
+  nb_enfants_a_charge Int
+  deuxieme_voiture    Boolean
+}
+
+// catalogue
+model catalogue {
+  id        Int     @id @default(autoincrement())
+  marque    String
+  nom       String
+  puissance Int
+  longueur  String?
+  nbplaces  Int?
+  nbportes  Int?
+  couleur   String?
+  occasion  Boolean
+  prix      Float
+}
+
+// clients
+model clients {
+  id                  Int     @id @default(autoincrement())
+  age                 Int
+  sexe                String
+  taux                Int
+  situation_familiale String
+  nb_enfants_a_charge Int
+  deuxieme_voiture    Boolean
+  immatriculation     String
+}
+
+// immatriculations
+model immatriculations {
+  id              Int     @id @default(autoincrement())
+  immatriculation String
+  marque          String
+  nom             String
+  puissance       Int
+  longueur        String?
+  nbplaces        Int?
+  nbportes        Int?
+  couleur         String?
+  occasion        Boolean
+  prix            Float
+}
+
+// co2
+model co2 {
+  id              Int    @id @default(autoincrement())
+  marque_modele   String
+  bonus_malus     String
+  rejets_co2_g_km Float
+  cout_energie    Float
+}

@@ -70,6 +70,15 @@ services:
       - POSTGRES_PASSWORD=HelloMBDS
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+
+  nodejs:
+    build: ./tpa-nodejs
+    container_name: tpa-nodejs
+    ports:
+      - "5000:5000"
+    networks:
+      - net
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pg-admin
