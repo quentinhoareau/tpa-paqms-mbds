@@ -1,0 +1,56 @@
+<div class="text-center">
+  <h1 class="text-center">Tableau board - Data Visualisation</h1>
+  <h2 class="text-center">Données lié aux marques de voiture</h2>
+  <div>
+    <p>Application créer sous Angular v15 <img width="50" src="assets/angular-logo.png"> </p>
+    Propulsé par <a href="https://d3js.org/" >d3js.org</a> <img width="50" src="assets/d3js-logo.svg">
+  </div>
+</div>
+
+<table mat-table
+       [dataSource]="marques" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="nom" >
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nbModel" >
+    <th mat-header-cell *matHeaderCellDef> Nombre de modèle aossocié </th>
+    <td mat-cell *matCellDef="let element"> {{element.nbModel}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element" >
+      <div class="text-end">
+        <button class="btn btn-primary" aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_downa</mat-icon>
+          <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+      <ng-container *ngIf="element == expandedElement">
+        <hr class="dashed" >
+        <div class="example-element-detail">
+
+          <app-charts-list [marque]="element.nom" ></app-charts-list>
+        </div>
+      </ng-container>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
