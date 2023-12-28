@@ -20,7 +20,10 @@ CREATE TABLE catalogue (
     nbPortes INTEGER,
     couleur VARCHAR(50),
     occasion BOOLEAN NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL
+    prix DECIMAL(10, 2) NOT NULL,
+	bonus_malus VARCHAR(20) NOT NULL,
+	rejets_co2_g_km DECIMAL(10, 1) NOT NULL,
+    cout_energie DECIMAL(10, 2) NOT NULL
 );
 
 -- CREATE TABLE clients

@@ -2,6 +2,7 @@ import couchdb
 import time
 import csv
 
+
 def save_csv_to_couchdb(csv_file_path, document_type, couchdb_url='http://admin:password@tpa-couchdb:5984/', db_name='tpa', retry_interval=3):
     # Connect to CouchDB
     server = couchdb.Server(couchdb_url)
@@ -36,8 +37,39 @@ def save_csv_to_couchdb(csv_file_path, document_type, couchdb_url='http://admin:
             print(f"Retrying in {retry_interval} seconds...")
             time.sleep(retry_interval)
 
+
+def create_or_update_view(db_name, design_doc_name, view_name, map_function, couchdb_url='http://admin:password@tpa-couchdb:5984/'):
+    server = couchdb.Server(couchdb_url)
+    db = server[db_name]
+
+    # Vérifier si le document de design existe déjà
+    if design_doc_name in db:
+        design_doc = db[design_doc_name]
+    else:
+        design_doc = {"_id": f"_design/{design_doc_name}", "views": {}}
+
+    # Ajouter ou mettre à jour la vue dans le document de design
+    design_doc["views"][view_name] = {"map": map_function}
+
+    # Sauvegarder le document de design
+    db.save(design_doc)
+    print(f"View '{view_name}' has been created/updated in design document '{design_doc_name}'.")
+
+
+
 # Insert data from Marketing CSV with a document_type of 'marketing'
 save_csv_to_couchdb('/tpa-python/datasource/Marketing_utf8.csv', 'marketing')
 
 # Insert data from Catalogue CSV with a document_type of 'catalogue'
 save_csv_to_couchdb('/tpa-python/datasource/Catalogue_utf8.csv', 'catalogue')
+
+# Creation de la vue pour avoir seulement les documents de "catalogue"
+create_or_update_view(db_name='tpa',
+                      design_doc_name="catalogue_views",
+                      view_name="all_catalogue",
+                      map_function="function (doc) { if (doc.document_type === 'catalogue') { emit(doc._id, doc); } }")
+
+create_or_update_view(db_name='tpa',
+                      design_doc_name="marketing_views",
+                      view_name="all_marketing",
+                      map_function="function (doc) { if (doc.document_type === 'marketing') { emit(doc._id, doc); } }")
