@@ -13,6 +13,7 @@ import { Stats3Component } from './stats3/stats3.component';
 import { Stats4Component } from './stats4/stats4.component';
 import { ChartsListComponent } from './charts-list/charts-list.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {MatInputModule} from "@angular/material/input";
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,14 +24,15 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     Stats4Component,
     ChartsListComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatIconModule,
-    NgbModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatIconModule,
+        NgbModule,
+        HttpClientModule,
+        MatInputModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
