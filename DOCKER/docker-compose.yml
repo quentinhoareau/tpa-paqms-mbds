@@ -75,7 +75,7 @@ services:
     build: ./tpa-nodejs
     container_name: tpa-nodejs
     ports:
-      - "5000:5000"
+      - "5004:5004"
     networks:
       - net
 
@@ -184,7 +184,12 @@ services:
       - namenode
     networks:
       - net
-      
+
+  angular:
+    container_name: tpa-angular
+    build: ./tpa-angular
+    ports:
+      - "4200:80"
     
 volumes:
   datanode: {}
