@@ -13,6 +13,37 @@ export class Stats2Component implements AfterViewInit{
 
   constructor() { }
 
+  convertToColor(str:string):string{
+    debugger
+    switch(str.toLowerCase()){
+      case "bleu":
+        return "#75a4d2";
+      case "rouge":
+        return "#d27575";
+      case "vert":
+        return "#75d27b";
+      case "jaune":
+        return "#d2d275";
+      case "orange":
+        return "#d29f75";
+      case "violet":
+        return "#d275d2";
+      case "rose":
+        return "#d275a4";
+      case "gris":
+        return "#a4a4a4";
+      case "marron":
+        return "#a4754d";
+      case "noir":
+        return "#000000";
+      case "blanc":
+        return "#ffffff";
+      default:
+        return "#000000";
+    }
+  }
+
+
   ngAfterViewInit(): void {
 
     const data = this.data;
@@ -69,7 +100,7 @@ export class Stats2Component implements AfterViewInit{
       .selectAll()
       .data(arcs)
       .join("path")
-      .attr("fill", d => color(d.data.couleur))
+      .attr("fill", d => this.convertToColor(d.data.couleur))
       .attr("d", arc)
       .append("title")
       .text(d => `${d.data.couleur}: ${d.data.nbPerson.toLocaleString("en-US")}`);
@@ -85,11 +116,14 @@ export class Stats2Component implements AfterViewInit{
       .call(text => text.append("tspan")
         .attr("y", "-0.4em")
         .attr("font-weight", "bold")
-        .text(d => d.data.couleur))
+          .attr("fill", d => this.convertToColor(d.data.couleur) === "#000000" ? "#ffffff" : "#000000")
+          .text(d => d.data.couleur))
       .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
         .attr("x", 0)
         .attr("y", "0.7em")
-        .attr("fill-opacity", 0.7)
+          .attr("fill", d => this.convertToColor(d.data.couleur) === "#000000" ? "#ffffff" : "#000000")
+
+          .attr("fill-opacity", 0.7)
         .text(d => d.data.nbPerson.toLocaleString("en-US")));
 
     return svg.node();

@@ -31,13 +31,13 @@ sleep 2
 # --- init HDFS et ajout CO2 dans HDFS --- #
 echo "Implementing HDFS..."
 docker cp ./datasource/cleaned_CO2.csv datanode:/usr
-docker exec -it datanode bash < ./tpa-datanode/hdfs.sh
+docker exec -i datanode bash < ./tpa-datanode/hdfs.sh
 echo "HDFS done \n\n"
 
 # --- MongoDB --- #
 echo "Init MongoDB database..."
-docker exec -it tpa-mongo sh ./tpa-mongo/initDB.sh
-docker exec -it tpa-postgres sh ./tpa-postgres/importPostgresDatasource.sh
+docker exec -i tpa-mongo sh ./tpa-mongo/initDB.sh
+docker exec -i tpa-postgres sh ./tpa-postgres/importPostgresDatasource.sh
 echo "MongoDB database done \n\n"
 
 
@@ -47,17 +47,20 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:5984); d
     sleep 5
 done
 echo "Init CouchDB database..."
-docker exec -it tpa-couchdb sh /tpa-couchdb/init.sh
-docker exec -it tpa-python python3 /tpa-python/populate-couchdb.py
+docker exec -i tpa-couchdb sh /tpa-couchdb/init.sh
+docker exec -i tpa-python python3 /tpa-python/populate-couchdb.py
 
 # --- Postgres --- #
 echo "Init Postgres... "
-docker exec -it tpa-postgres sh ./tpa-postgres/initDB.sh
+docker exec -i tpa-postgres sh ./tpa-postgres/initDB.sh
 echo "Postgres done \n\n"
 
 # --- runing hadoop map reduce --- #
 echo "Runing Map reduce..."
 docker cp ../hadoop-map-reduce/hadoop-map-reduce/out/artifacts/hadoop_map_reduce_jar/hadoop-map-reduce.jar datanode:/usr
-docker cp ../hadoop-map-reduce/tranformCatalogue/out/artifacts/transformCatalogue_jar/transformCatalogue.jar datanode:/usr
-#docker exec -it datanode bash < ./tpa-datanode/runMapReduce.sh
+docker exec -i datanode bash < ./tpa-datanode/runMapReduce.sh
+sleep 5s
+
+docker exec -i tpa-python python3 /tpa-python/transformCatalogue.py
+
 echo "Map reduce done \n\n"

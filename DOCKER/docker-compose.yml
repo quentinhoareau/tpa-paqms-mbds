@@ -70,6 +70,15 @@ services:
       - POSTGRES_PASSWORD=HelloMBDS
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+
+  nodejs:
+    build: ./tpa-nodejs
+    container_name: tpa-nodejs
+    ports:
+      - "5004:5004"
+    networks:
+      - net
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pg-admin
@@ -155,6 +164,7 @@ services:
     image: python:3.8
     depends_on: 
       - couchdb
+      - namenode
     build: ./tpa-python
     container_name: tpa-python
     ports:
@@ -164,6 +174,8 @@ services:
     volumes:
       - ./tpa-python/volumes:/tpa-python
       - ./datasource/datasource_utf8/couchdb:/tpa-python/datasource
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
       
   python-app:
     container_name: tpa-python-app
