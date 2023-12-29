@@ -116,7 +116,7 @@ VALUES
     (38, 'F', 2, 'Célibataire', 0, FALSE, 'EFG850');
     (39, 'F', 2, 'Célibataire', 0, FALSE, 'EFG854');
 
-INSERT INTO immatriculations (immatriculation, marque, nom, puissance, longueur, nbPlaces, nbPortes, couleur, occasion, prix)
+INSERT INTO immatriculations (immatriculation, marque, nom, puissance, longueur, nb_places, nb_portes, couleur, occasion, prix)
 VALUES
     ('ABC123', 'Renault', 'Megane', 120, 'moyenne', 5, 5, 'gris', TRUE, 20000.00),
     ('EFG850', 'Renault', 'Megane', 120, 'moyenne', 5, 5, 'rouge', TRUE, 21000.00),
