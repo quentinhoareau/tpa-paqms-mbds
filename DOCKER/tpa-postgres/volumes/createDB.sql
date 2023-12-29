@@ -12,15 +12,15 @@ CREATE TABLE marketing (
 -- CREATE TABLE catalogue
 CREATE TABLE catalogue (
     id SERIAL PRIMARY KEY,
-    marque VARCHAR(255) NOT NULL,
-    nom VARCHAR(255) NOT NULL,
-    puissance INTEGER NOT NULL,
+    marque VARCHAR(255),
+    nom VARCHAR(255),
+    puissance INTEGER,
     longueur VARCHAR(50),
     nbPlaces INTEGER,
     nbPortes INTEGER,
     couleur VARCHAR(50),
-    occasion BOOLEAN NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL
+    occasion BOOLEAN,
+    prix DECIMAL(10, 2)
 );
 
 -- CREATE TABLE clients
@@ -38,24 +38,24 @@ CREATE TABLE clients (
 -- CREATE TABLE immatriculations
 CREATE TABLE immatriculations (
     id SERIAL PRIMARY KEY,
-    immatriculation VARCHAR(15) NOT NULL,
-    marque VARCHAR(255) NOT NULL,
-    nom VARCHAR(255) NOT NULL,
-    puissance INTEGER NOT NULL,
+    immatriculation VARCHAR(15),
+    marque VARCHAR(255),
+    nom VARCHAR(255),
+    puissance INTEGER,
     longueur VARCHAR(50),
     nbPlaces INTEGER,
     nbPortes INTEGER,
     couleur VARCHAR(50),
-    occasion BOOLEAN NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL
+    occasion BOOLEAN,
+    prix DECIMAL(10, 2)
 );
 
 -- CREATE TABLE co2
 CREATE TABLE co2 (
     id SERIAL PRIMARY KEY,
-    marque_modele VARCHAR(255) NOT NULL,
-    bonus_malus VARCHAR(20) NOT NULL,
-    rejets_co2_g_km DECIMAL(10, 1) NOT NULL,
-    cout_energie DECIMAL(10, 2) NOT NULL
+    marque_modele VARCHAR(255),
+    bonus_malus VARCHAR(20),
+    rejets_co2_g_km DECIMAL(10, 1),
+    cout_energie DECIMAL(10, 2)
 );
 
