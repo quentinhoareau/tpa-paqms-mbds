@@ -3,6 +3,17 @@ import time
 import csv
 
 
+def convert_value(value):
+    try:
+        # Tente de convertir en entier
+        return int(value)
+    except ValueError:
+        try:
+            # Sinon, tente de convertir en flottant
+            return float(value)
+        except ValueError:
+                return value
+
 def save_csv_to_couchdb(csv_file_path, document_type, couchdb_url='http://admin:password@tpa-couchdb:5984/', db_name='tpa', retry_interval=3):
     # Connect to CouchDB
     server = couchdb.Server(couchdb_url)
@@ -20,8 +31,9 @@ def save_csv_to_couchdb(csv_file_path, document_type, couchdb_url='http://admin:
                     for row in csv_reader:
                         # Add the document_type field to the document
                         row['document_type'] = document_type
+                        converted_row = {key: convert_value(value) for key, value in row.items()}
                         # Insert data into the database
-                        doc_id, doc_rev = db.save(row)
+                        doc_id, doc_rev = db.save(converted_row)
                         nbDoc += 1
                         # Print the generated document ID and revision
                         
