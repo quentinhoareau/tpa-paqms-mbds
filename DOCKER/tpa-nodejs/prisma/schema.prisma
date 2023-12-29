@@ -20,27 +20,30 @@ model marketing {
 
 // catalogue
 model catalogue {
-  id        Int     @id @default(autoincrement())
-  marque    String
-  nom       String
-  puissance Int
-  longueur  String?
-  nbplaces  Int?
-  nbportes  Int?
-  couleur   String?
-  occasion  Boolean
-  prix      Float
+  id              Int     @id @default(autoincrement())
+  marque          String
+  nom             String
+  puissance       Int
+  longueur        String?
+  nbplaces        Int?
+  nbportes        Int?
+  couleur         String?
+  occasion        String
+  prix            Int
+  bonus_malus     Int
+  rejets_co2_g_km Int
+  cout_energie    Int
 }
 
 // clients
 model clients {
   id                  Int     @id @default(autoincrement())
-  age                 Int
-  sexe                String
-  taux                Int
-  situation_familiale String
+  age                 Int?
+  sexe                String?
+  taux                Int?
+  situation_familiale String?
   nb_enfants_a_charge Int
-  deuxieme_voiture    Boolean
+  deuxieme_voiture    String
   immatriculation     String
 }
 
@@ -52,17 +55,18 @@ model immatriculations {
   nom             String
   puissance       Int
   longueur        String?
-  nbplaces        Int?
-  nbportes        Int?
+  nb_places       Int?
+  nb_portes       Int?
   couleur         String?
-  occasion        Boolean
+  occasion        String
   prix            Float
 }
 
 // co2
 model co2 {
   id              Int    @id @default(autoincrement())
-  marque_modele   String
+  marque          String
+  modele          String
   bonus_malus     String
   rejets_co2_g_km Float
   cout_energie    Float

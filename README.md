@@ -22,4 +22,7 @@ Assurez-vous d'avoir complété les prérequis avant de procéder.
       - Il va falloir vérifier plusieurs choses :
         - Vérifiez que le script `DOCKER/start.sh` est bien encodé en UTF-8.
         - Vérifiez que le script `DOCKER/start.sh` a bien les droits d'exécution.
-        - Vérifiez que le script `DOCKER/start.sh` a bien les fins de ligne de type UNIX.
+        - Vérifiez que le script `DOCKER/start.sh` a bien les fins de ligne de type UNIX :
+          - Pour se faire : vous pouvez utiliser notepad++ et ouvrir les fichiers de script .sh (c'est important car tout les fichiers sh doivent être au format UNIX) :
+          - Une fois les fichiers ouverts, en bas à droite de la fenêtre, vous avez le type d'encodage et le type de fin de ligne.
+          - Si c'est "Windows (CR LF)" il faut le passer en "UNIX (LF)" et sauvegarder ensuite le fichier

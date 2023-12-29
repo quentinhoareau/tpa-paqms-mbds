@@ -110,10 +110,10 @@ export const getCouleursParMarque = async (req, res) => {
                 marque: marque
             }
         })
-        const allColors = couleursParMarque.map((couleur) => couleur.couleur);
+        const allColorsUnique = [...new Set(couleursParMarque.map((couleur) => couleur.couleur))];
         let nbPersonByColors = [];
 
-        for (let couleur of allColors) {
+        for (let couleur of allColorsUnique) {
             const nbPerson = await prisma.immatriculations.count({
                 where: {
                     marque: marque,
