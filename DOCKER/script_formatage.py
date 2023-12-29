@@ -46,6 +46,9 @@ def funToConvertUTF8(input_file, path_output_folder):
     # Convertir le fichier en UTF-8
     df = pd.read_csv(input_file, encoding='latin-1')
 
+    # Renommer la colonne de base en fonction de votre besoin
+    df = df.rename(columns={'2eme voiture': 'deuxieme_voiture', 'situationFamiliale':'situation_familiale', 'nbEnfantsAcharge' : 'nb_enfants_a_charge', 'nbPlaces':'nb_places', 'nbPortes':'nb_portes'})
+
     # Supprimer le fichier de sortie s'il existe déjà
     if os.path.exists(output_file):
         try:
