@@ -41,6 +41,7 @@ echo "NiFi est opérationnel."
 echo "Copie du driver JDBC PostgreSQL dans NiFi..."
 docker cp ./nifi-drivers/postgresql-42.4.0.jar nifi:/opt/nifi/nifi-current/lib/
 
+docker restart nifi
 # --- init HDFS et ajout CO2 dans HDFS --- #
 echo "Implementing HDFS..."
 docker cp ./datasource/cleaned_CO2.csv datanode:/usr
