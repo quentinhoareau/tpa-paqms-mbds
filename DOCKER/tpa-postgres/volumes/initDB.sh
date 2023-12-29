@@ -1,9 +1,20 @@
 #!/bin/bash
-# Connexion à la console PostgresSQL
-echo 'Connexion to PostgresSQL'
-createdb -U postgres -h localhost -p 5432 -e tpa_postgres
-psql -U postgres -d tpa_postgres -a -f create_db.sql
-echo 'Base de donnée et tables crées'
-echo 'Import data in collection'
-# Importation des données
-echo 'Import finished'
+
+# Fonction pour vérifier la disponibilité du serveur PostgreSQL
+check_postgres_server() {
+    pg_isready -U postgres -h localhost -q
+}
+
+# Attendre que le serveur PostgreSQL soit disponible
+while ! check_postgres_server; do
+    echo "En attente du serveur PostgreSQL..."
+    sleep 1
+done
+
+# Le serveur PostgreSQL a répondu
+echo 'Connexion à PostgresSQL'
+createdb -U postgres -h localhost -e tpa_postgres
+psql -U postgres -d tpa_postgres -a -f ./tpa-postgres/createDB.sql
+echo 'Base de données et tables créées'
+echo 'Importation des données dans la collection'
+echo 'Importation terminée'

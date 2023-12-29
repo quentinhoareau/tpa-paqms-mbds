@@ -1,0 +1,6 @@
+<div class="row charts p-4" *ngIf="dataChart1 && dataChart2 && dataChart3 && dataChart4">
+    <div class="col" ><app-stats1 [data]="dataChart1" [chartId]="marque+'1'" ></app-stats1></div>
+    <div class="col" > <app-stats2 [data]="dataChart2" [chartId]="marque+'2'" ></app-stats2></div>
+    <div class="col" > <app-stats3 [data]="dataChart3" [chartId]="marque+'3'" ></app-stats3></div>
+    <div class="col" ><app-stats4 [data]="dataChart4" [chartId]="marque+'4'" ></app-stats4></div>
+</div>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8befa48-5fe8-4a61-a9fe-4bc55fc17dad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AlexisMalattia"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="85f62986-e38f-40c8-bdd4-5e82fe51de95" />
+        <option name="url" value="https://github.com/quentinhoareau/tpa-paqms-mbds.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2XqwtuuSxImuP3cUMbjRYFaIIyi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "nifi",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DOCKER" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DOCKER" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8befa48-5fe8-4a61-a9fe-4bc55fc17dad" name="Changes" comment="" />
+      <created>1699370136436</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699370136436</updated>
+      <workItem from="1699370139927" duration="2848000" />
+      <workItem from="1699432548382" duration="8000" />
+      <workItem from="1699889918040" duration="117000" />
+      <workItem from="1699890615430" duration="2363000" />
+      <workItem from="1699952443033" duration="20000" />
+      <workItem from="1699967662122" duration="1822000" />
+      <workItem from="1699972778873" duration="4003000" />
+      <workItem from="1700036429725" duration="797000" />
+      <workItem from="1700044888433" duration="596000" />
+      <workItem from="1700563809514" duration="547000" />
+      <workItem from="1700572867756" duration="3259000" />
+      <workItem from="1701098294122" duration="1899000" />
+      <workItem from="1701167512698" duration="2149000" />
+      <workItem from="1701191641342" duration="4325000" />
+      <workItem from="1701678542063" duration="52000" />
+      <workItem from="1701678893360" duration="605000" />
+      <workItem from="1701697613300" duration="3726000" />
+      <workItem from="1702286673827" duration="703000" />
+      <workItem from="1702290237892" duration="3013000" />
+      <workItem from="1702300977830" duration="3802000" />
+      <workItem from="1702387221572" duration="48000" />
+      <workItem from="1703587556435" duration="1121000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
