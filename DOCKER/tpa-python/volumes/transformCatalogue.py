@@ -26,14 +26,12 @@ def update_couchdb_documents(couchdb_url, db_name, hdfs_data):
         marque = marque.lower()
 
         if marque in hdfs_data:
-            doc['Bonus / Malus'], doc['Rejets CO2 g/km'], doc['Cout Energie'] = hdfs_data[marque]
+            doc['bonus_malus'], doc['rejets_co2_g_km'], doc['cout_energie'] = hdfs_data[marque]
             db.save(doc)
-            print(f"Updated document: {doc_id}")
 
         else :
-            doc['Bonus / Malus'], doc['Rejets CO2 g/km'], doc['Cout Energie'] = [0, 0, 0]
+            doc['bonus_malus'], doc['rejets_co2_g_km'], doc['cout_energie'] = [0, 0, 0]
             db.save(doc)
-            print(f"Updated document: {doc_id}")
 
 
 if __name__ == "__main__":

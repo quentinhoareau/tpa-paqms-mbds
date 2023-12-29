@@ -56,7 +56,8 @@ CREATE TABLE immatriculations (
 -- CREATE TABLE co2
 CREATE TABLE co2 (
     id SERIAL PRIMARY KEY,
-    marque_modele VARCHAR(255) NOT NULL,
+	marque VARCHAR(255) NOT NULL,
+    modele VARCHAR(255) NOT NULL,
     bonus_malus VARCHAR(20) NOT NULL,
     rejets_co2_g_km DECIMAL(10, 1) NOT NULL,
     cout_energie DECIMAL(10, 2) NOT NULL

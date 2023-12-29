@@ -40,8 +40,8 @@ public class CO2Analysis {
                 // Ajout d'une vérification pour s'assurer que la chaîne n'est pas vide
                 if (parts.length >= 3 && !parts[0].isEmpty() && !parts[1].isEmpty() && !parts[2].isEmpty()) {
                     try {
-                        totalCO2 += Double.parseDouble(parts[0]);
-                        totalBonusMalus += Double.parseDouble(parts[1]);
+                        totalBonusMalus += Double.parseDouble(parts[0]);
+                        totalCO2 += Double.parseDouble(parts[1]);
                         totalCoutEnergie += Double.parseDouble(parts[2]);
                         count++;
                     } catch (NumberFormatException e) {
@@ -56,7 +56,7 @@ public class CO2Analysis {
                 double averageCO2 = totalCO2 / count;
                 double averageBonusMalus = totalBonusMalus / count;
                 double averageCoutEnergie = totalCoutEnergie / count;
-                String averages = averageCO2 + "," + averageBonusMalus + "," + averageCoutEnergie;
+                String averages = averageBonusMalus + "," + averageCO2 + "," + averageCoutEnergie;
                 context.write(key, new Text(averages));
             }
         }
