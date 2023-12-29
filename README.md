@@ -26,3 +26,7 @@ Assurez-vous d'avoir complété les prérequis avant de procéder.
           - Pour se faire : vous pouvez utiliser notepad++ et ouvrir les fichiers de script .sh (c'est important car tout les fichiers sh doivent être au format UNIX) :
           - Une fois les fichiers ouverts, en bas à droite de la fenêtre, vous avez le type d'encodage et le type de fin de ligne.
           - Si c'est "Windows (CR LF)" il faut le passer en "UNIX (LF)" et sauvegarder ensuite le fichier
+ ### Utilisation de NiFi
+  Pour la mise en place Nifi "from scratch" avec des images, veuillez consulter le rapport (partie **Bus de données en NIFI**)
+  Si le template est déjà chargé (il doit être chargé au premier lancement, docker le conserve ensuite en mémoire), on exécute toutes les chaines de processeurs unes par unes (par exemple, on prend une chaine GetMongo,   et on démarre tous les processeurs qui lui sont connectés. Ensuite, on fait un clique droit sur GetMongo, et on clique sur "Run Once"
+
