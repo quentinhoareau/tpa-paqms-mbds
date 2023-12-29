@@ -46,8 +46,8 @@ CREATE TABLE immatriculations (
     nom VARCHAR(255) NOT NULL,
     puissance INTEGER NOT NULL,
     longueur VARCHAR(50),
-    nbPlaces INTEGER,
-    nbPortes INTEGER,
+    nb_places INTEGER,
+    nb_portes INTEGER,
     couleur VARCHAR(50),
     occasion BOOLEAN NOT NULL,
     prix DECIMAL(10, 2) NOT NULL

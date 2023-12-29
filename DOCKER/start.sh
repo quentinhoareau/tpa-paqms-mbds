@@ -9,12 +9,14 @@ pip3 --version
 echo "Refactor CSV File to utf8..."
 pip3 install pandas
 python3 ./script_formatage.py
+python ./script_formatage.py
 sudo cp -r ./datasource/datasource_utf8/mongo/ ./tpa-mongo/volumes/datasource
 
 # --- Refactor CO2 --- #
 echo "Refactor CO2 File to Readable CO2 file..."
 pip3 install numpy
 python3 ./script_formatage_CO2.py
+python ./script_formatage_CO2.py
 
 # --- Docker compose --- #
 echo "Docker compose..."
