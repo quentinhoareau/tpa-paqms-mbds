@@ -6,6 +6,7 @@
 - Installation de Python sur votre machine locale.
 - Si vous êtes sous Windows, il va falloir installer wsl2 (sous la forme d'un ubuntu ou debian peu importe)
 - IMPORTANT : Vérifier que wsl2 est bien dans la version 2 (<a href="https://docs.docker.com/desktop/wsl/">suivre ce tuto</a>) et coché dans les paramètres de Docker Desktop l'utilisation de wsl2.
+- IMPORTANT : Vérifier dans les paramètres de Docker Desktop > Resources > WSL INTEGRATION que votre distribution wsl2 est bien coché (Ubuntu ou Debian peu importe).
 
 ## Démarrage du script de construction du lac de données
 Assurez-vous d'avoir complété les prérequis avant de procéder.
@@ -23,6 +24,8 @@ Assurez-vous d'avoir complété les prérequis avant de procéder.
         - Vérifiez que le script `DOCKER/start.sh` est bien encodé en UTF-8.
         - Vérifiez que le script `DOCKER/start.sh` a bien les droits d'exécution.
         - Vérifiez que le script `DOCKER/start.sh` a bien les fins de ligne de type UNIX :
-          - Pour se faire : vous pouvez utiliser notepad++ et ouvrir les fichiers de script .sh (c'est important car tout les fichiers sh doivent être au format UNIX) :
+          - Pour se faire : vous pouvez utiliser notepad++ et ouvrir les fichiers de script .sh et les scripts python (c'est important car tout les fichiers sh doivent être au format UNIX) :
+          - > Scripts python : script_formatage.py, script_formatage_CO2.py, populate_couchdb.py, transformCatalogue.py 
+          - > Script sh : start.sh, init.sh (x2), initDB.sh (x2), hdfs.sh, runMapReduce.sh
           - Une fois les fichiers ouverts, en bas à droite de la fenêtre, vous avez le type d'encodage et le type de fin de ligne.
           - Si c'est "Windows (CR LF)" il faut le passer en "UNIX (LF)" et sauvegarder ensuite le fichier
