@@ -1,36 +1,66 @@
-library("cluster")
-library("tidyverse")
+install.packages(c("cluster", "rpart", "C50", "tree", "ggplot2"))
 
-clients <- read.csv("C:/Users/micha/Documents/MBDS/TPA/tpa-paqms-mbds/data-analysis/Clients_10.csv", header = TRUE, sep = ",", dec = ".", stringsAsFactors = T)
-immatriculations <- read.csv("C:/Users/micha/Documents/MBDS/TPA/tpa-paqms-mbds/data-analysis/Immatriculations.csv", header = TRUE, sep = ",", dec = ".", stringsAsFactors = T)
+library(cluster)
+library(rpart)
+library(C50)
+library(tree)
+library(ggplot2)
 
-clients_immatriculations <- inner_join(clients, immatriculations, by = "immatriculation", relationship = "many-to-many")
-#clients_immatriculations <- subset(clients_immatriculations, select = -immatriculation)
 
-#clients_immatriculations_matrix <- daisy(clients_immatriculations)
+clients <- read.csv("./Clients_clean.csv", header = TRUE, sep = ",", dec = ".", stringsAsFactors = T)
+immatriculations <- read.csv("./Immatriculations.csv", header = TRUE, sep = ",", dec = ".", stringsAsFactors = T)
+nouveaux_clients <- read.csv("./Marketing.csv", header = TRUE, sep = ",", dec = ".", stringsAsFactors = T)
 
-#clientsimmatriculations_kmeans <- kmeans(clients_immatriculations_matrix, 4)
+clients_immatriculations <- merge(clients, immatriculations, by = "immatriculation")
 
-variables_clustering <- clients_immatriculations %>% select(age, nbEnfantsAcharge, nbPlaces, nbPortes, prix)
+features <- clients_immatriculations[, c("age", "taux", "nbEnfantsAcharge", "puissance", "nbPlaces", "nbPortes", "prix")]
 
-scaled_data <- scale(variables_clustering)
+set.seed(123)
+k_values <- 1:10
+withinss <- numeric(length(k_values))
 
-wss <- numeric(10)
-for (i in 1:10) {
-  wss[i] <- sum(kmeans(variables_clustering, centers = i)$withinss)
-  print(summary(wss[i]))
+for (k in k_values) {
+  kmeans_result <- kmeans(features, centers = k)
+  withinss[k] <- kmeans_result$tot.withinss
 }
 
-plot(1:10, wss, type = "b", xlab = "Number of Clusters",
-     ylab = "Within groups sum of squares")
+elbow_plot <- data.frame(K = k_values, Withinss = withinss)
+ggplot(elbow_plot, aes(x = K, y = Withinss)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Graphique de Coude",
+       x = "Nombre de Clusters (K)",
+       y = "Somme des Carrés Intra-Cluster (Withinss)")
 
-k_optimal <- 7
+kmeans_result <- kmeans(features, centers = 6)
+clients_immatriculations$cluster <- kmeans_result$cluster
 
-kmeans_result <- kmeans(variables_clustering, centers = k_optimal, nstart = 20)
+for (i in 1:7) {
+  boxplot(features[, i] ~ kmeans_result$cluster, main = paste("Variable", i), xlab = "Cluster", ylab = names(features)[i])
+}
 
-data$cluster <- as.factor(kmeans_result$cluster)
+cluster_categories <- c("Berline", "Familiale", "Sportive", "Citadine", "Compacte", "Break")
+clients_immatriculations$Categorie <- cluster_categories[clients_immatriculations$cluster]
 
-categories <- c("Familiale", "Sportive", "Citadine")
-data$Categorie <- categories[data$cluster]
+clients <- merge(clients, clients_immatriculations[, c("immatriculation", "Categorie")], by = "immatriculation")
 
-print(data)
+set.seed(456)
+indices_train <- sample(nrow(clients), 0.8 * nrow(clients))
+ensemble_apprentissage <- clients[indices_train, ]
+ensemble_test <- clients[-indices_train, ]
+
+ensemble_apprentissage$Categorie <- as.factor(ensemble_apprentissage$Categorie)
+ensemble_apprentissage <- na.omit(ensemble_apprentissage)
+
+modele_rpart <- rpart(Categorie ~ age + taux + nbEnfantsAcharge, data = ensemble_apprentissage)
+taux_succes_rpart <- sum(predict(modele_rpart, ensemble_test, type = "class") == ensemble_test$Categorie) / nrow(ensemble_test)
+
+modele_C50 <- C5.0(Categorie ~ age + taux + nbEnfantsAcharge, data = ensemble_apprentissage)
+taux_succes_C50 <- sum(predict(modele_C50, ensemble_test) == ensemble_test$Categorie) / nrow(ensemble_test)
+
+modele_tree <- tree(Categorie ~ age + taux + nbEnfantsAcharge, data = ensemble_apprentissage)
+taux_succes_tree <- sum(predict(modele_tree, ensemble_test) == ensemble_test$Categorie) / nrow(ensemble_test)
+
+nouveaux_clients$Categorie <- predict(modele_C50, nouveaux_clients)
+
+write.csv(nouveaux_clients, "./Results.csv", row.names = FALSE)

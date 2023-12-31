@@ -33,6 +33,7 @@ def corriger_ligne(ligne):
     ligne[3] = corriger_situation_familiale(ligne[3])
     return ligne
 
+
 with open('Clients_10.csv', 'r', newline='') as csvfile_1, open('Clients_19.csv', 'r', newline='') as csvfile_2, open('Clients_clean.csv', 'w', newline='') as csvfile_clean:
     lecteur_1_csv = csv.reader(csvfile_1)
     lecteur_2_csv = csv.reader(csvfile_2)
@@ -46,17 +47,13 @@ with open('Clients_10.csv', 'r', newline='') as csvfile_1, open('Clients_19.csv'
     if en_tete_1 is not None:
         print(f"En-tête du CSV_1 : {en_tete_1}")
         for ligne in lecteur_1_csv:
-            #print(f"-ligne originale {ligne}")
             ligne_corrigee = corriger_ligne(ligne)
-            #print(f"-ligne corrigee {ligne_corrigee}")
             if all(element != "NULL" for element in ligne_corrigee):
                 ecrivain_csv.writerow(ligne_corrigee)
     
     if en_tete_2 is not None:
         print(f"En-tête du CSV_2 : {en_tete_2}")
         for ligne in lecteur_2_csv:
-            #print(f"-ligne originale {ligne}")
             ligne_corrigee = corriger_ligne(ligne)
-            #print(f"-ligne corrigee {ligne_corrigee}")
             if all(element != "NULL" for element in ligne_corrigee):
                 ecrivain_csv.writerow(ligne_corrigee)
